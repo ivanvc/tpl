@@ -14,6 +14,7 @@ import (
 // Runs the template to generate the output.
 func Run(cfg *config.Config) {
 	env := loadEnvironment(cfg)
+	log.Debug("Loaded environment", "env", env)
 	input := cfg.Input
 	t := template.New("input")
 	tpl := template.Must(t.Funcs(sprig.TxtFuncMap()).Funcs(tpl.IncludeFunc(t)).Parse(input))

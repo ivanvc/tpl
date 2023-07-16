@@ -12,21 +12,19 @@ import (
 
 // Config represents the configuration options for the program.
 type Config struct {
-	Input    string
-	JSON     string
-	TOML     string
-	YAML     string
-	UseStdin bool
+	Input            string
+	Env              string
+	UseStdin         bool
+	SetDebugLogLevel bool
 }
 
 // Loads the configuration options.
 func Load() *Config {
 	c := new(Config)
 	flag.StringVar(&c.Input, "input", "", "The template input to process.")
-	flag.StringVar(&c.JSON, "json", "", "The JSON environment for the template.")
-	flag.StringVar(&c.TOML, "toml", "", "The TOML environment for the template.")
-	flag.StringVar(&c.YAML, "yaml", "", "The YAML environment for the template.")
+	flag.StringVar(&c.Env, "env", "", "The environment for the template (YAML, JSON or TOML).")
 	flag.BoolVar(&c.UseStdin, "stdin", false, "Read template from stdin.")
+	flag.BoolVar(&c.SetDebugLogLevel, "debug", false, "Set debug log level")
 	flag.Parse()
 
 	if len(c.Input) == 0 {
@@ -40,5 +38,10 @@ func Load() *Config {
 		c.Input = string(b)
 	}
 
+	if c.SetDebugLogLevel {
+		log.Default().SetLevel(log.DebugLevel)
+	}
+
+	log.Debug("Loaded configuration", "config", c)
 	return c
 }

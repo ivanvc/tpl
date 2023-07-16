@@ -2,6 +2,7 @@ package template
 
 import (
 	"encoding/json"
+	"os"
 
 	"github.com/BurntSushi/toml"
 	"github.com/charmbracelet/log"
@@ -14,41 +15,29 @@ import (
 type environment map[string]any
 
 func loadEnvironment(cfg *config.Config) environment {
-	var (
-		env   environment
-		input []byte
-	)
-	if len(cfg.YAML) > 0 {
-		if cfg.YAML[0] == '@' {
-			input = io.ReadFile(cfg.YAML[1:])
+	var env environment
+	input := []byte(cfg.Env)
+
+	if cfg.Env[0] == '@' {
+		if _, err := os.Stat(cfg.Env[1:]); err == nil {
+			input = io.ReadFile(cfg.Env[1:])
 		} else {
-			input = []byte(cfg.YAML)
-		}
-		if err := yaml.Unmarshal(input, &env); err != nil {
-			log.Fatal("Error parsing YAML", "error", err)
+			log.Debug("Error opening file", "error", err, "file", cfg.Env[1:])
 		}
 	}
 
-	if len(cfg.JSON) > 0 {
-		if cfg.JSON[0] == '@' {
-			input = io.ReadFile(cfg.JSON[1:])
-		} else {
-			input = []byte(cfg.JSON)
-		}
-		if err := json.Unmarshal(input, &env); err != nil {
-			log.Fatal("Error parsing JSON", "error", err)
-		}
+	if err := json.Unmarshal(input, &env); err == nil {
+		return env
+	} else {
+		log.Debug("Error parsing JSON", "error", err)
 	}
-
-	if len(cfg.TOML) > 0 {
-		if cfg.TOML[0] == '@' {
-			input = io.ReadFile(cfg.TOML[1:])
-		} else {
-			input = []byte(cfg.TOML)
-		}
-		if err := toml.Unmarshal(input, &env); err != nil {
-			log.Fatal("Error parsing TOML", "error", err)
-		}
+	if err := yaml.Unmarshal(input, &env); err == nil {
+		return env
+	} else {
+		log.Debug("Error parsing YAML", "error", err)
+	}
+	if err := toml.Unmarshal(input, &env); err != nil {
+		log.Debug("Error parsing TOML", "error", err)
 	}
 
 	return env
