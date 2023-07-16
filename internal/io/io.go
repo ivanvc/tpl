@@ -2,8 +2,9 @@ package io
 
 import (
 	"io"
-	"log"
 	"os"
+
+	"github.com/charmbracelet/log"
 )
 
 func ReadFile(file string) []byte {
