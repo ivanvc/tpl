@@ -19,10 +19,13 @@ func loadEnvironment(cfg *config.Config) environment {
 	input := []byte(cfg.Env)
 
 	if cfg.Env[0] == '@' {
-		if _, err := os.Stat(cfg.Env[1:]); err == nil {
-			input = io.ReadFile(cfg.Env[1:])
+		f := cfg.Env[1:]
+		if _, err := os.Stat(f); err == nil {
+			if input, err = io.ReadFile(f); err != nil {
+				log.Warn("Error reading file", "error", err, "file", f)
+			}
 		} else {
-			log.Debug("Error opening file", "error", err, "file", cfg.Env[1:])
+			log.Debug("Error opening file", "error", err, "file", f)
 		}
 	}
 

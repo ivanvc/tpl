@@ -2,17 +2,12 @@ package config
 
 import (
 	"flag"
-	"io"
-	"os"
-
-	"github.com/charmbracelet/log"
-
-	intio "github.com/ivanvc/tpl/internal/io"
 )
 
 // Config represents the configuration options for the program.
 type Config struct {
 	Input            string
+	InputFile        string
 	Env              string
 	UseStdin         bool
 	SetDebugLogLevel bool
@@ -27,21 +22,7 @@ func Load() *Config {
 	flag.BoolVar(&c.SetDebugLogLevel, "debug", false, "Set debug log level")
 	flag.Parse()
 
-	if len(c.Input) == 0 {
-		c.Input = string(intio.ReadFile(flag.Arg(0)))
-	}
-	if c.UseStdin {
-		b, err := io.ReadAll(os.Stdin)
-		if err != nil {
-			log.Fatal("Could not read input template")
-		}
-		c.Input = string(b)
-	}
+	c.InputFile = flag.Arg(0)
 
-	if c.SetDebugLogLevel {
-		log.Default().SetLevel(log.DebugLevel)
-	}
-
-	log.Debug("Loaded configuration", "config", c)
 	return c
 }

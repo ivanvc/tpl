@@ -3,18 +3,16 @@ package io
 import (
 	"io"
 	"os"
-
-	"github.com/charmbracelet/log"
 )
 
-func ReadFile(file string) []byte {
+func ReadFile(file string) ([]byte, error) {
 	f, err := os.Open(file)
 	if err != nil {
-		log.Fatal("Error opening file", "file", file, "error", err)
+		return nil, err
 	}
 	b, err := io.ReadAll(f)
 	if err != nil {
-		log.Fatal("Error reading file", "file", file, "error", err)
+		return nil, err
 	}
-	return b
+	return b, nil
 }
