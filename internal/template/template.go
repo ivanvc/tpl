@@ -25,7 +25,6 @@ func Run(cfg *config.Config) {
 	log.Debug("Loaded input template", "tpl", input)
 
 	env := loadEnvironment(cfg)
-	log.Debug("Loaded environment", "env", env)
 
 	t := template.New("input")
 	tpl := template.Must(t.Funcs(sprig.TxtFuncMap()).Funcs(tpl.IncludeFunc(t)).Parse(input))
