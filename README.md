@@ -181,7 +181,7 @@ Generates the following output:
 [documentation](https://masterminds.github.io/sprig/).
 
 It also defines the `include` function as defined by Helm. So you can include
-templates defined before, see the [JSON][#JSON] example to see its usage.
+templates defined before, see the [JSON](#JSON) example to see its usage.
 
 ## License
 
