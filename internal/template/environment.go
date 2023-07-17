@@ -29,19 +29,23 @@ func loadEnvironment(cfg *config.Config) environment {
 		}
 	}
 
+	log.Debug("Loading environment", "input", string(input))
 	if err := json.Unmarshal(input, &env); err == nil {
+		log.Debug("Loaded JSON environment", "env", env)
 		return env
 	} else {
 		log.Debug("Error parsing JSON", "error", err)
 	}
-	if err := yaml.Unmarshal(input, &env); err == nil {
+	if err := toml.Unmarshal(input, &env); err == nil {
+		log.Debug("Loaded TOML environment", "env", env)
 		return env
 	} else {
-		log.Debug("Error parsing YAML", "error", err)
-	}
-	if err := toml.Unmarshal(input, &env); err != nil {
 		log.Debug("Error parsing TOML", "error", err)
 	}
+	if err := yaml.Unmarshal(input, &env); err != nil {
+		log.Debug("Error parsing YAML", "error", err)
+	}
 
+	log.Debug("Loaded YAML environment", "env", env)
 	return env
 }
