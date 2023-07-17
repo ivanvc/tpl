@@ -12,7 +12,7 @@ import (
 	"github.com/ivanvc/tpl/internal/io"
 )
 
-type environment map[string]any
+type environment any
 
 func loadEnvironment(cfg *config.Config) environment {
 	var env environment
