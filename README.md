@@ -8,7 +8,7 @@
 </g>
 </svg>
 
-`tpl` is a simple Go templates wrapper. It enables using them in the command
+`tpl` is a simple [Go template] wrapper. It enables using them in the command
 line by using the `tpl` binary.
 
 ## Installation
@@ -50,7 +50,7 @@ Options:
 ```
 ### YAML
 
-Assuming you have a template `main.tf.tpl` with:
+Assuming you have a template with:
 
 ```hcl
 module "app" {
@@ -124,7 +124,8 @@ Generates the output:
 
 ### TOML
 
-It also supports TOML. Generating index pages is easy, given the template:
+It also supports TOML. Generating index pages is easy, given the index.tpl.html
+template:
 
 ```html
 <!DOCTYPE html>
@@ -147,7 +148,7 @@ It also supports TOML. Generating index pages is easy, given the template:
 Running it with:
 
 ```bash
-$ tpl -env @<(echo -e "dir='$(basename $PWD)'\nfiles=['$(echo * | sed s/[[:space:]]/\',\'/g)']") index.html
+$ tpl -env @<(echo -e "dir='$(basename $PWD)'\nfiles=['$(echo * | sed s/[[:space:]]/\',\'/g)']") index.tpl.html
 ```
 
 Generates the following output:
@@ -186,6 +187,7 @@ templates defined before, see the [JSON][#JSON] example to see its usage.
 
 See [LICENSE](LICENSE) © [Ivan Valdes](https://github.com/ivanvc/)
 
+[Go template]: https://pkg.go.dev/text/template
 [releases page]: https://github.com/ivanvc/tpl/releases
 
 <!--
