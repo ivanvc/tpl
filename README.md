@@ -18,6 +18,10 @@ line by using the `tpl` binary.
     ```bash
     $ go install github.com/ivanvc/tpl@latest
     ```
+3. Or use it with Docker
+    ```bash
+    $ docker run --rm ivan/tpl:latest --help
+    ```
 
 ## Usage
 
