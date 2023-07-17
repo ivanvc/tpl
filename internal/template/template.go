@@ -26,7 +26,7 @@ func Run(cfg *config.Config) {
 
 	env := loadEnvironment(cfg)
 
-	t := template.New("input")
+	t := template.New("__tpl_input")
 	tpl := template.Must(t.Funcs(sprig.TxtFuncMap()).Funcs(tpl.IncludeFunc(t)).Parse(input))
 	if err := tpl.Execute(os.Stdout, env); err != nil {
 		log.Fatal("Error executing template", "error", err)
