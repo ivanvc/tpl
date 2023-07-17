@@ -18,7 +18,7 @@ func loadEnvironment(cfg *config.Config) environment {
 	var env environment
 	input := []byte(cfg.Env)
 
-	if cfg.Env[0] == '@' {
+	if len(cfg.Env) > 0 && cfg.Env[0] == '@' {
 		f := cfg.Env[1:]
 		if _, err := os.Stat(f); err == nil {
 			if input, err = io.ReadFile(f); err != nil {
