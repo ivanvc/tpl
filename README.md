@@ -38,7 +38,9 @@ If you specify that the template comes from the stdin by setting the option flag
 If you set it as the first argument, it assumes that it is a file.
 
 For the environment (-env) it will expect it as inline data. However, if you
-start it with @, it will assume it is a file.
+start it with @, it will assume it is a file. It tries to guess the format,
+giving precedence to JSON, then TOML, and lastly to YAML. Unless you specify to
+force parsing it via an option flag.
 
 The output is sent to stdout.
 
@@ -49,9 +51,16 @@ Options:
         The environment for the template (YAML, JSON or TOML).
   -input string
         The template input to process.
+  -json
+        Force the environment to be parsed as a JSON.
   -stdin
         Read template from stdin.
+  -toml
+        Force the environment to be parsed as a TOML.
+  -yaml
+        Force the environment to be parsed as a YAML.
 ```
+
 ### YAML
 
 Assuming you have a template with:
