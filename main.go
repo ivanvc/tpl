@@ -13,5 +13,5 @@ func main() {
 	}
 	log.Debug("Loaded configuration", "config", cfg)
 
-	template.Run(cfg)
+	template.Execute(cfg)
 }

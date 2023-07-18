@@ -13,8 +13,8 @@ import (
 	tpl "github.com/ivanvc/tpl/pkg/template"
 )
 
-// Runs the template to generate the output.
-func Run(cfg *config.Config) {
+// Excutes the template to generate the output.
+func Execute(cfg *config.Config) {
 	input, err := loadInput(cfg)
 	if err != nil {
 		log.Fatal("Error loading input template", "error", err)
@@ -27,7 +27,12 @@ func Run(cfg *config.Config) {
 	env := loadEnvironment([]byte(cfg.Env))
 
 	t := template.New("__tpl_input")
-	tpl := template.Must(t.Funcs(sprig.TxtFuncMap()).Funcs(tpl.IncludeFunc(t)).Parse(input))
+	tpl := template.Must(
+		t.Funcs(sprig.TxtFuncMap()).
+			Funcs(tpl.IncludeFunc(t)).
+			Funcs(tpl.FileSizeFunc).
+			Parse(input),
+	)
 	if err := tpl.Execute(os.Stdout, env); err != nil {
 		log.Fatal("Error executing template", "error", err)
 	}
