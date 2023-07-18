@@ -6,6 +6,8 @@ require (
 	github.com/BurntSushi/toml v1.3.2
 	github.com/Masterminds/sprig/v3 v3.2.3
 	github.com/charmbracelet/log v0.2.2
+	github.com/dustin/go-humanize v1.0.1
+	github.com/spf13/cast v1.3.1
 	gopkg.in/yaml.v2 v2.4.0
 )
 
@@ -27,7 +29,6 @@ require (
 	github.com/muesli/termenv v0.15.1 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
-	github.com/spf13/cast v1.3.1 // indirect
 	golang.org/x/crypto v0.3.0 // indirect
 	golang.org/x/sys v0.6.0 // indirect
 )
