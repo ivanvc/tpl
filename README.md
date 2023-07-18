@@ -79,8 +79,7 @@ name: test
 ```
 
 ```bash
-$
-cat <<EOF | tpl -env 'name: test' -stdin
+$ cat <<EOF | tpl -env 'name: test' -stdin
 module "app" {
     source = "../modules/app"
     name   = "{{ .name }}"
