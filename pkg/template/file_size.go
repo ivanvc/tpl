@@ -6,7 +6,7 @@ import (
 )
 
 // Defines the function map defining the file_size function.
-var FileSizeFunc = map[string]any{"file_size": fileSize}
+var FileSizeFunc = map[string]any{"fileSize": fileSize}
 
 // Formats as a human-readable file size from a bytes size.
 func fileSize(v any) string {

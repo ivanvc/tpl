@@ -25,7 +25,7 @@ func TestFileSize(t *testing.T) {
 func TestFileSizeInTemplate(t *testing.T) {
 	tpl, err := template.New("fileSize").
 		Funcs(FileSizeFunc).
-		Parse(`{{ file_size 4096 }},{{ file_size "4096" }},{{ file_size .input }}`)
+		Parse(`{{ fileSize 4096 }},{{ fileSize "4096" }},{{ fileSize .input }}`)
 	if err != nil {
 		t.Errorf("Error parsing template %q", err)
 	}
