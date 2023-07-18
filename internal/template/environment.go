@@ -14,7 +14,6 @@ import (
 type environment any
 
 func loadEnvironment(input []byte, forceJSON, forceTOML, forceYAML bool) environment {
-	log.Default().SetLevel(log.DebugLevel)
 	var env environment
 
 	if len(input) > 0 && input[0] == '@' {
@@ -57,7 +56,7 @@ func loadEnvironment(input []byte, forceJSON, forceTOML, forceYAML bool) environ
 
 func loadJSONEnvironment(input []byte, env *environment) error {
 	if err := json.Unmarshal(input, &env); err == nil {
-		log.Debug("Loaded JSON environment", "env", env)
+		log.Debug("Loaded JSON environment", "env", *env)
 		return nil
 	} else {
 		log.Debug("Error parsing JSON", "error", err)
@@ -67,7 +66,7 @@ func loadJSONEnvironment(input []byte, env *environment) error {
 
 func loadTOMLEnvironment(input []byte, env *environment) error {
 	if err := toml.Unmarshal(input, &env); err == nil {
-		log.Debug("Loaded TOML environment", "env", env)
+		log.Debug("Loaded TOML environment", "env", *env)
 		return nil
 	} else {
 		log.Debug("Error parsing TOML", "error", err)
@@ -77,7 +76,7 @@ func loadTOMLEnvironment(input []byte, env *environment) error {
 
 func loadYAMLEnvironment(input []byte, env *environment) error {
 	if err := yaml.Unmarshal(input, &env); err == nil {
-		log.Debug("Loaded YAML environment", "env", env)
+		log.Debug("Loaded YAML environment", "env", *env)
 		return nil
 	} else {
 		log.Debug("Error parsing YAML", "error", err)
