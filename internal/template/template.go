@@ -24,7 +24,7 @@ func Execute(cfg *config.Config) {
 	}
 	log.Debug("Loaded input template", "tpl", input)
 
-	env := loadEnvironment([]byte(cfg.Env))
+	env := loadEnvironment([]byte(cfg.Env), cfg.ForceJSONEnv, cfg.ForceTOMLEnv, cfg.ForceYAMLEnv)
 
 	t := template.New("__tpl_input")
 	tpl := template.Must(
