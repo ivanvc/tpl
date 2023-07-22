@@ -101,7 +101,7 @@ module "app" {
 It works with JSON environments:
 
 ```bash
-$ cat <<EOF | tpl -env "$(curl https://api.github.com/users/ivanvc/events 2> /dev/null)"
+$ cat <<EOF | tpl -stdin -env "$(curl https://api.github.com/users/ivanvc/events 2> /dev/null)"
 {{- define "type" -}}
 {{ . | replace "Event" "" | lower }}
 {{- end -}}
@@ -136,8 +136,8 @@ Generates the output:
 
 ### TOML
 
-It also supports TOML. Generating index pages is easy, given the index.tpl.html
-template:
+It also supports TOML. Generating index pages is easy, given the
+`index.html.tpl` template:
 
 ```html
 <!DOCTYPE html>
@@ -160,7 +160,7 @@ template:
 Running it with:
 
 ```bash
-$ tpl -env @<(echo -e "dir='$(basename $PWD)'\nfiles=['$(echo * | sed s/[[:space:]]/\',\'/g)']") index.tpl.html
+$ tpl -env @<(echo -e "dir='$(basename $PWD)'\nfiles=['$(echo * | sed s/[[:space:]]/\',\'/g)']") index.html.tpl
 ```
 
 Generates the following output:
