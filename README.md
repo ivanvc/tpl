@@ -192,8 +192,10 @@ Generates the following output:
 `tpl` includes Sprig functions, refer to their
 [documentation](https://masterminds.github.io/sprig/).
 
-It also defines the `include` function as defined by Helm. So you can include
-templates defined before, see the [JSON](#JSON) example to see its usage.
+* `include`: This function is as defined by Helm. So you can include
+  templates defined before, see the [JSON](#JSON) example to see its usage.
+* `fileSize`: This function returns a human-readable file size from
+  integer bytes, i.e. given the input "1024", it returns "1.0 kB".
 
 ## License
 
