@@ -29,10 +29,10 @@ Executes the template from the input applying the environment passed in options.
 If you specify the input template via an option flag (-input), then it will
 read it inline.
 If you specify that the template comes from the stdin by setting the option flag
-(-stdin), then it will read it inline from the stdin.
-If you set it as the first argument, it assumes that it is a file.
+(-stdin), or the first argument as "-" then it will read it inline from the stdin.
+If you set it as the first argument, it assumes it is a file.
 
-For the environment (-env) it will expect it as inline data. However, if you
+For the environment (-env), it will expect it as inline data. However, if you
 start it with @, it will assume it is a file. It tries to guess the format,
 giving precedence to JSON, then TOML, and lastly to YAML. Unless you specify to
 force parsing it via an option flag.
