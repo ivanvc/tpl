@@ -40,13 +40,13 @@ func Execute(cfg *config.Config) {
 
 func loadInput(cfg *config.Config) (string, error) {
 	var input string
-	if len(cfg.InputFile) > 0 {
+	if len(cfg.InputFile) > 0 && cfg.InputFile != "-" {
 		b, err := intio.ReadFile(cfg.InputFile)
 		if err != nil {
 			return input, err
 		}
 		input = string(b)
-	} else if cfg.UseStdin {
+	} else if cfg.UseStdin || cfg.InputFile == "-" {
 		b, err := io.ReadAll(os.Stdin)
 		if err != nil {
 			return input, err
